@@ -1,0 +1,291 @@
+:root {
+    --bg-main: #1A2238;
+    --bg-card: #2C3E50;
+    --bg-card-selected: #223447;
+    --text-main: #F1F1F1;
+    --text-highlight: #FFD700;
+    --accent-cyan: #00F5D4;
+    --accent-cyan-hover: #16E1CA;
+    --accent-coral: #FF6B6B;
+    --accent-purple: #A55EEA;
+    --border-glow: 0 0 12px rgba(0, 245, 212, 0.4);
+}
+
+/* Mobile First: Estilos base pensados para pantallas pequeñas */
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 15px;
+    padding-bottom: 140px; /* Espacio holgado para la barra flotante en móvil */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--bg-card);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: var(--accent-cyan);
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.btn-subir {
+    background-color: var(--accent-cyan);
+    color: #1A2238;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.btn-subir:hover {
+    background-color: var(--accent-cyan-hover);
+    box-shadow: var(--border-glow);
+}
+
+/* Contenedor principal adaptable (Grid fluido para móviles y escritorio) */
+.workspace {
+    display: grid;
+    grid-template-columns: 1fr; /* En móviles ocupa todo el ancho */
+    gap: 15px;
+}
+
+/* A partir de tablets (600px en adelante), se ponen en columnas */
+@media (min-width: 600px) {
+    .workspace {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+}
+
+/* Tarjeta de cada archivo */
+.file-card {
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    border: 2px solid rgba(255,255,255,0.05);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.file-card:hover {
+    border-color: rgba(0, 245, 212, 0.3);
+}
+
+.file-card.selected {
+    background-color: var(--bg-card-selected);
+    border-color: var(--accent-cyan);
+    box-shadow: var(--border-glow);
+    transform: translateY(-2px);
+}
+
+.file-card .select-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    background-color: rgba(0,0,0,0.5);
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.file-card.selected .select-badge {
+    background-color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+    color: #1A2238;
+}
+
+.file-thumbnail {
+    background-color: #1A2238;
+    height: 90px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-purple);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.file-name {
+    font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-controls {
+    display: flex;
+    gap: 8px;
+}
+
+button.action-btn {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    flex: 1;
+}
+
+.btn-ver { background-color: var(--accent-purple); color: white; }
+.btn-ver:hover { opacity: 0.85; }
+
+.btn-descargar { background-color: var(--accent-cyan); color: #1A2238; }
+.btn-descargar:hover { background-color: var(--accent-cyan-hover); }
+
+select.format-select {
+    background-color: #1A2238;
+    color: var(--text-main);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    padding: 8px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Barra Flotante de Acciones (Optimizada para móviles) */
+.floating-action-bar {
+    position: fixed;
+    bottom: -120px;
+    left: 10px;
+    right: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(44, 62, 80, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--accent-cyan);
+    padding: 12px 16px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+}
+
+@media (min-width: 500px) {
+    .floating-action-bar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+    }
+}
+
+.floating-action-bar.visible {
+    bottom: 20px;
+}
+
+.floating-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: bold;
+    color: var(--text-highlight);
+    font-size: 0.9rem;
+}
+
+.floating-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-float-action {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: 1;
+    transition: opacity 0.2s;
+}
+
+.btn-merge {
+    background-color: var(--accent-coral);
+    color: white;
+}
+
+.btn-batch-download {
+    background-color: var(--accent-cyan);
+    color: #1A2238;
+}
+
+.btn-float-action:hover {
+    opacity: 0.9;
+}
+
+/* Modal Responsive */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.modal-box {
+    background-color: var(--bg-card);
+    padding: 25px 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    border: 1px solid var(--accent-cyan);
+    box-sizing: border-box;
+}
+
+.close-modal {
+    float: right;
+    cursor: pointer;
+    color: var(--accent-coral);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.modal-subtitle {
+    font-size: 0.85rem;
+    color: #a0aec0;
+}
+
+#fileInput {
+    margin: 15px 0;
+    color: white;
+    width: 100%;
+}

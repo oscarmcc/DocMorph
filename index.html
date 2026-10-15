@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- Meta viewport indispensable para Mobile First -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocMorph - Gestor y Conversor de Archivos</title>
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 para alertas molonas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- pdf-lib para convertir e integrar cualquier archivo en un PDF maestro -->
+    <script src="https://unpkg.com/pdf-lib@1.4.0/dist/pdf-lib.min.js"></script>
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1><i class="fa-solid fa-shapes"></i> DocMorph</h1>
+        <button class="btn-subir" id="openModalBtn">
+            <i class="fa-solid fa-cloud-arrow-up"></i> <span class="btn-text">Subir archivo</span>
+        </button>
+    </header>
+
+    <!-- Área principal de archivos -->
+    <main>
+        <div class="workspace" id="fileWorkspace">
+            <!-- Aquí aparecerán las tarjetas dinámicamente -->
+        </div>
+    </main>
+
+    <!-- Barra Flotante Global (Mobile First optimizada) -->
+    <div class="floating-action-bar" id="floatingBar">
+        <div class="floating-info">
+            <i class="fa-solid fa-layer-group"></i>
+            <span id="selectedCountText">0 seleccionados</span>
+        </div>
+        <div class="floating-buttons">
+            <button class="btn-float-action btn-merge" id="btnMergePdf">
+                <i class="fa-solid fa-file-pdf"></i> Unir en un PDF
+            </button>
+            <button class="btn-float-action btn-batch-download" id="btnBatchDownload">
+                <i class="fa-solid fa-download"></i> Descargar
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Subida -->
+    <div class="modal-overlay" id="uploadModal">
+        <div class="modal-box">
+            <span class="close-modal" id="closeModalBtn">&times;</span>
+            <h2 style="color: var(--accent-cyan);"><i class="fa-solid fa-folder-open"></i> Sube tus documentos</h2>
+            <p class="modal-subtitle">Soporta PNG, JPG, JPEG, PDF, Word (admite selección múltiple)</p>
+            
+            <input type="file" id="fileInput" multiple accept=".png, .jpg, .jpeg, .pdf, .doc, .docx">
+            <br>
+            <button class="btn-subir" id="confirmUploadBtn" style="width: 100%; margin-top: 15px;">
+                <i class="fa-solid fa-check"></i> Aceptar y Procesar
+            </button>
+        </div>
+    </div>
+
+    <!-- JS Externo -->
+    <script src="script.js"></script>
+</body>
+</html>
